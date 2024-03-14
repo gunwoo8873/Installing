@@ -1,29 +1,17 @@
-FROM node:21-alpine:3.18
+FROM python:3
 
-VOLUME [ "/test-volume" ]
+# MainFile Directory
+WORKDIR /usr/src/app .
+COPY /app .
 
-# Node and Npm Version Check
-RUN echo "Node Version:" && node --version
-LABEL NODE_VERSION="20.11.1"
-RUN echo "NPM Version:" && npm --version
-LABEL NPM_VERSION = "10.2.4"
-
-# Folder Directory
-# Main directory
-WORKDIR /app .
-COPY docker-compose.yml .
-COPY test.sh .
-
-# Automation Directory
-WORKDIR .github/workflows .
-COPY Action.yml .
-
-# ???
 WORKDIR /public .
-WORKDIR /src .
 
-# PortNumber
+# Github Action Automation Directory
+WORKDIR .github/workflows .
+COPY action.yml .
+
+# Docker Build Create a new Image form port
 ENV PORT 8080
 EXPOSE ${PORT}
 
-CMD ["node", "test-server.js"]
+CMD [ "apachectl". "-D", "FOREGROUND" ]

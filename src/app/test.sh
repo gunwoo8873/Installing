@@ -1,11 +1,20 @@
 #!/bin/bash
 
-container_name = --name
+
+# Container
+i = --interactive || -i
+t = --tty || -t
+# Image
+
+# Volume
+
+# Options
+name = --name
 remove = --remove
 rm = --rm
 
 echo "Container Create"
-docker container create ${container_name}
+docker container create name
 
-echo "Container Remove
-docker container remove ${container_name}
+echo "Container Remove" ${name}
+docker container remove ${name}
