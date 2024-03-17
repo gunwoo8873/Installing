@@ -1,35 +1,21 @@
 #!/bin/bash
-echo " Param = $# "
 
-# Output Display
+# Options
+container_name="$2"
+container_option="$1"
 
-
-# Option
-option=""
-tag_version=""
-
-# Container
-container_name=""
-container_option=""
-
-# ?
-create_container() {
-    echo "Container Create $container_name, $image_name"
-    docker container create $container_option $container_name $image_name:$tag_version
+create_container(){
+    echo "create container $container_name"
+    docker container create "$container_option" --name "$container_name" "$bulde_image"
 }
+create_container
 
-# Volume
-volume_name=""
-
-create_volume() {
-    echo "Volume Create $volume_name"
-    docker volume create $volume_name
+remove_container(){
+    echo "remove container $container_name"
+    docker rm container "$container_name"
 }
+remove_container
+
 
 # Image
-image_name=""
-dockerhub_repository=""
-
-# Dockerhub Push Build Image
-echo "Docker Hub Push to Build Image"
-docker push "$dockerhub_repository:$tag_version"
+bulde_image="$3"
