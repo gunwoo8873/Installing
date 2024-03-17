@@ -1,7 +1,8 @@
 FROM python:3
 
 # MainFile Directory
-WORKDIR /usr/src/app .
+WORKDIR /src/app/dev .
+COPY /dev .
 COPY /app .
 
 WORKDIR /public .

@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Options
-container_name="$2"
-container_option="$1"
+# Option
+
+# Container
+container_name="$@"
+container_option="$@"
 
 create_container(){
     echo "create container $container_name"
@@ -16,6 +18,11 @@ remove_container(){
 }
 remove_container
 
+rename_container(){
+    echo "rename container $container_name to $container_name"
+    docker container rename "$container_name" "$container_name"
+}
+rename_container
 
 # Image
-bulde_image="$3"
+bulde_image="$@"
