@@ -6,6 +6,12 @@
 container_name="$@"
 container_option="$@"
 
+case $container_option in
+    "-it")
+        echo "create container $container_name"
+        docker container create "$container_option" --name "$container_name" "$bulde_image"
+esac
+
 create_container(){
     echo "create container $container_name"
     docker container create "$container_option" --name "$container_name" "$bulde_image"
@@ -23,6 +29,7 @@ rename_container(){
     docker container rename "$container_name" "$container_name"
 }
 rename_container
+
 
 # Image
 bulde_image="$@"
