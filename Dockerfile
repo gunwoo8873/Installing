@@ -1,17 +1,19 @@
 FROM python:3
 
-# MainFile Directory
+# Localfile Directory
 WORKDIR /src/app/dev .
-COPY /dev .
-COPY /app .
+COPY ./src/app/dev/test.sh .
+
+WORKDIR /src/app .
+COPY ./src/app/test.py .
 
 WORKDIR /public .
 
 # Github Action Automation Directory
-WORKDIR .github/workflows .
-COPY action.yml .
+WORKDIR /.github/workflows
+COPY ./.github/workflows/action.yml .
 
-# Docker Build Create a new Image form port
+# Docker Build Create a new Image formport
 ENV PORT 8080
 EXPOSE ${PORT}
 
