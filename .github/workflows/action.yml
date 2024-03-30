@@ -1,17 +1,11 @@
-name: CI Testing Github Action
+name: Github Action Testing yml
 
-on:
-  push:
-    branches:
-      - "main"
-
-env:
-  IMAGE_NAME: user/app
+on: [push, fork]
+run-name: Deployment CI/CD Testing ${{ inputs.sha }} by @${{ gituhb.actor }}
 
 jobs:
-  docker:
+    version:
     runs-on: ubuntu-latest
     steps:
-      -
-        name : Github Push and Commit
-        uses : docker/build-push-action@v1
+        -
+            uses: actions/checkout@v3
