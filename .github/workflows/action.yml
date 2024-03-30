@@ -1,11 +1,16 @@
 name: Github Action Testing yml
 
-on: [push, fork]
+on:
+    branch_protection_rule:
+        types: [created, deleted]
+
 run-name: Deployment CI/CD Testing ${{ inputs.sha }} by @${{ gituhb.actor }}
 
 jobs:
     version:
     runs-on: ubuntu-latest
     steps:
-        -
-            uses: actions/checkout@v3
+        #
+        - uses: actions/checkout@v3
+
+        #
