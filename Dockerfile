@@ -1,17 +1,17 @@
-FROM python:3
+FROM node:latest
 
 # Localfile Directory
 WORKDIR /src/app/dev .
 COPY ./src/app/dev/test.sh .
 
 WORKDIR /src/app .
-COPY ./src/app/test.py .
+COPY test.py .
 
 WORKDIR /public .
 
 # Github Action Automation Directory
 WORKDIR /.github/workflows
-COPY ./.github/workflows/action.yml .
+COPY action.yml .
 
 # Docker Build Create a new Image formport
 ENV PORT 8080
