@@ -1,6 +1,11 @@
 {
   "dependencies": {
     "express": "^4.19.2",
-    "next.js": "^1.0.3"
-  }
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "net": "^1.0.2",
+    "next.js": "^1.0.3",
+    "url": "^0.11.3"
+  },
+  "scripts": "node test.js"
 }
