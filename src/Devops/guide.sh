@@ -8,6 +8,7 @@ echo Host Name : ${HOSTNAME}
 echo File Name :  $0, $$ # ./guide.sh, 1826
 echo File Useing Sec : ${SECONDS} sec
 
+echo "------------------------------------------------"
 # Path
 echo File Directory : ${PWD} # PWD : Directory
 
@@ -17,11 +18,10 @@ echo Test Script Output1 : echo
 printf Test Script Output2 : printf
 
 # Boolean
-A=true B=false # 한 행의 두가지 변수 사용
-if [ ${A} = ${B} ]; then 
-    echo ${A} = ${B} : true
+if [ -e $filename ]; then
+    echo File Exist
 else
-    echo ${A} = ${B} : false
+    echo File Not Exist
 fi
 
 # Array(Element)
@@ -33,7 +33,7 @@ echo Element All Output : ${Number_Arr[*]} # 1 2 3 4 5 6 7 8 9 10
 echo Element Target Output : ${Number_Arr[6]} # 7
 echo Element Target Output : ${Number_Arr[*]:6} # 7 8 9 10
 # Element Size
-echo Element Size :  ${#Number_Arr[*]} # 10
+echo Element Size :  ${#Number_Arr[*]} # (1 ~ 10)10
 # First Element added
 Number_Arr+=1
 echo Element All Output : ${Number_Arr[*]}

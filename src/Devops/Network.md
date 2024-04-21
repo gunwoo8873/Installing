@@ -14,7 +14,6 @@
     1.3 L2 Data Link Layer (`OSI`)
 
 2. L2 **Internet Access** Layer (`TCP/IP`)  
-    *   
     2.2 L3 Network Access Layer (`OSI`)
 
 3. L3 **Transport** Layer (`TCP/IP`)  
