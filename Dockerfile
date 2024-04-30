@@ -1,8 +1,6 @@
 FROM node:latest
 
-WORKDIR /src
-COPY package.json .
-COPY . /src/Front
+RUN git clone https://github.com/gunwoo8873/fp1_project.git
 
 EXPOSE 8080
 CMD [ 'node', './src/server.js' ]
