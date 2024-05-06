@@ -1,6 +1,0 @@
-# node module
-node_modules
-
-# Package
-package-lock.json
-docker_login.json
