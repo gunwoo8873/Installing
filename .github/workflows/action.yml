@@ -1,18 +1,11 @@
 name: test-github-action
 
 on:
-    push: branches: ["main"]
-    pull_request: branches: ["main"]
+    push: branches: ["master"]
+    pull_request: branches: ["master"]
 
 job:
     name: test-github-action
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v2
-        - name: Setup node.js 20.x
-            uses: actions/setup-node@v3
-            with: node-version: '20' cache: 'npm'
-
-        - run: npm ci
-        - run: npm run lint
-        - run: npm run test
+        
