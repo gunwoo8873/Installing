@@ -1,8 +1,8 @@
 FROM node:latest
 
-VOLUME [ "/var/docker/docker_volume" ]
+COPY . .
 
-RUN git clone https://github.com/gunwoo8873/fp1_project.git
+#RUN git clone https://github.com/gunwoo8873/fp1_project.git
 #RUN npm install packahe.json
 WORKDIR /src .
 
