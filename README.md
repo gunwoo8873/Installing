@@ -2,7 +2,7 @@
 ---
 **2024.03.06 ~**
 * `Commit`, `Push`, `Pull Request` 커맨드 스킵
-    * `Command` : a...z, `Name` : A...Z
+    * `Command` : A...Z, `Name` : Aa...Zz
 
     * Select를 이용하여 선택형 기능 구현 ( 2024. 05. 08 ~ ** )
         * Add + Commit --> Push
