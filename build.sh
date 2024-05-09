@@ -13,7 +13,6 @@ function git_menu {
                         all)
                             read -p "Commit Message : " COMMIT_MESSAGE
                             git add * && git commit -m "${COMMIT_MESSAGE}"
-                            break 1
                         ;;
                         each)
                             read -p "ADD Target File : " FILE_TARGET
