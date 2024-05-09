@@ -9,9 +9,13 @@ echo "-------------------"
 function git_menu {
     git branch -l
     PS3="Git Repo Menu : "
-    select REPOSITORY_MENU in 'COMMIT' 'PULL_NULL' 'BRANCH' 'STATUS_NULL' 'EXIT'
+    select REPOSITORY_MENU in 'INIT' 'COMMIT' 'PULL_NULL' 'BRANCH' 'STATUS_NULL' 'EXIT'
     do
         case $REPOSITORY_MENU in
+            INIT)
+                echo "Repository already"
+                git init
+            ;;
             COMMIT)
                 PS3="Commit File Target : "
                 select ADD_TARGET in 'ALL' 'INDIVIDUAL' 'REMOVE' 'BACK'
@@ -55,6 +59,7 @@ function git_menu {
                                 break 1
                             fi
                         done
+
                     elif [[ $ADD_TARGET == 'BACK' ]]; then
                         git_menu
                     fi
@@ -84,6 +89,7 @@ function git_menu {
 
                     elif [[ $BRANCH_MENU == 'REMOVE' ]]; then
                         clear
+                        git branch -l 
                         read -p "Remove Branch Name : " BRANCH_NAME
                         git branch -D "${BRANCH_NAME}"
                         git_menu
