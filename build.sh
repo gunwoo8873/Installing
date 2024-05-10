@@ -9,12 +9,21 @@ echo "-------------------"
 function git_menu {
     git branch -l
     PS3="Git Repo Menu : "
-    select REPOSITORY_MENU in 'INIT' 'COMMIT' 'PULL_NULL' 'BRANCH' 'STATUS_NULL' 'EXIT'
+    select REPOSITORY_MENU in 'INIT' 'COMMIT' 'PULLL' 'BRANCH' 'STATUS_NULL' 'EXIT'
     do
         case $REPOSITORY_MENU in
             INIT)
                 echo "Repository already"
                 git init
+
+                read -p "Global User.name : " USER_NAME
+                git config --global user.name "${USER_NAME}"
+                read -p "Global User.email : " USER_EMAIL
+                git config --global user.email "${USER_EMAIL}"
+
+                echo "Repository Pull"
+                git pull
+                git_menu
             ;;
             COMMIT)
                 PS3="Commit File Target : "
@@ -66,8 +75,10 @@ function git_menu {
                 done
             ;;
 
-            PULL_NULL)
-                echo "pull"
+            PULL)
+                echo "Repository Pull"
+                git pull
+                git_menu
             ;;
 
             BRANCH)
