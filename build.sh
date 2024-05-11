@@ -3,11 +3,10 @@
 echo "-------------------"
 git --version
 echo "-------------------"
-git log -p -2
-echo "-------------------"
+git log -2
+git branch -l
 
 function git_menu {
-    git branch -l
     PS3="Git Repo Menu : "
     select REPOSITORY_MENU in 'INIT' 'COMMIT' 'PULLL' 'BRANCH' 'STATUS_NULL' 'EXIT'
     do
@@ -25,6 +24,7 @@ function git_menu {
                 git pull
                 git_menu
             ;;
+            
             COMMIT)
                 PS3="Commit File Target : "
                 select ADD_TARGET in 'ALL' 'INDIVIDUAL' 'REMOVE' 'BACK'
