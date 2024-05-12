@@ -8,16 +8,35 @@ function git_init {
         if [[ -d .git ]]; then
             echo "Repogitory for .git already"
             git_menu
+        elif [[ ! -d .git ]]; then
+            echo "Initializing Repository"
+            git init
+
+            if [[ -r config.json ]]; then
+                #read -p "Global User.name : " USER_NAME
+                #git config --global user.name "${USER_NAME}"
+                #read -p "Global User.email : " USER_EMAIL
+                #git config --global user.email "${USER_EMAIL}"
+                USER_NAME=${jq -r '.GIT_USER.GIT_NAME' config.json}
+                git config --global user.name "${USER_NAME}"
+                USER_EMAIL=${jq -r '.GIT_USER.GIT_EMAIL' config.json}
+                git config --global user.email "${USER_EMAIL}"
+
+            elif [[ ! -d config.json ]]; then
+                echo "Creating new Config.json"
+                read -p "Global User.name : " GIT_NAME
+                read -p "Global User.email : " GIT_EMAIL
+                echo "{ "USER" : { "GIT_NAME" : '${GIT_NAME}', "GIT_EMAIL" : ${GIT_EMAIL} }}" > config.json
+                
+                # jq : read for JSON text
+                USER_NAME=${jq -r '.GIT_USER.GIT_NAME' config.json}
+                git config --global user.name "${USER_NAME}"
+                USER_EMAIL=${jq -r '.GIT_USER.GIT_EMAIL' config.json}
+                git config --global user.email "${USER_EMAIL}"
+
+                git_menu
+            fi
         fi
-
-        echo "Initializing Repository"
-        git init
-
-        read -p "Global User.name : " USER_NAME
-        git config --global user.name "${USER_NAME}"
-        read -p "Global User.email : " USER_EMAIL
-        git config --global user.email "${USER_EMAIL}"
-
         git_menu
 
     elif [[ $INIT_SETUP == [N,n] ]]; then
