@@ -10,8 +10,8 @@
         ```json
         {
             "GIT_USER" : {
-                "GIT_NAME" : "choigunwoo",
-                "GIT_EMAIL" : "gunwoo8873@outlook.kr"
+                "GIT_NAME" : "your_name",
+                "GIT_EMAIL" : "your_email"
             }
         }
         ```
