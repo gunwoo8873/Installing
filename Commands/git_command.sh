@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+################################################################
+# Start developing Git management commands (2024. 04. 10 ~ )
+################################################################
+# QnA
+################################################################
+
 # Main File Set list and configuration
-BASH_RUNFILE_PATH="./../Bash_run.sh"
+# SCRIPT_PATH=$(dirname "$0")
+# BASH_RUNFILE_PATH="$SCRIPT_PATH/../Bash_run.sh"
 
 # Repository Setup
 function Settings() {
@@ -14,7 +21,9 @@ function Settings() {
             local ERROR_CHECK="^[!#$%&'*+-/=?^_{|}~]$"
 
             Init_userName() {
+                # -p : 
                 read -p "Enter the username : " GET_USERNAME
+                # =~ : regular expression / 정규표현식
                 if [[ ${GET_USERNAME} =~ ${NAME_CHECK} ]]; then
                     git config --global user.name ${GET_USERNAME}
                 elif [[ ${GET_USERNAME} =~ ${ERROR_CHECK} ]]; then
@@ -94,17 +103,20 @@ function Settings() {
             echo "Repository to HRAD reset"
             echo Warings : Note that the initializes additional and committed files and returns all of the work.""
             echo "경고 : 추가 및 커밋된 파일을 초기화하고 모든 작업을 반환합니다."
+            git reset --hard
         }
 
         # Soft : Note that the initializes additional and committed files and returns of the work
         #
         Soft() {
             echo "Repository to SOFT reset"
+            git reset --soft HAED~1
         }
 
         # Mixed : 
         Mixed() {
             echo "Repository to MIXED reset"
+            git reset --mixed
         }
 
         PS3=""
@@ -178,7 +190,6 @@ function Commit() {
     }
 
     Merge() {
-        Branch.Current
         read -p "Enter the branch you want to commit. : " MERGE_MAIN_BRANCH
         git checkout $MERGE_MAIN_BRANCH
         read -p "Enter Branch to merge : " MERGE_MAIN_BRANCH
@@ -245,9 +256,8 @@ function Branch() {
     }
 
     Info() {
-        read -p "Enter the branch name : " BRANCH_NAME
-        # --show-current
-        git branch --list || git branch -l
+        read -p "Enter the branch name: " BRANCH_NAME
+        git branch -v | grep "${BRANCH_NAME}"
     }
 
     PS3="Select a branch management option : "
@@ -269,14 +279,14 @@ function History() {
     Graph() {
         echo "It's a function that's not currently being implemented"
         git log --graph
-        :wq
+        History
     }
 
     Log() {
         echo "It's a function that's not currently being implemented"
-        read -p "Enter the Git logs at Number : "
-        git log -p ${LOGS_NUMBER}
-        :wq
+        read -p "Enter the Looking for Git logs at scope : "
+        git log -p ${SCOPE_NUMBER}
+        History
     }
 
     PS3="Enter the History menu : "
@@ -292,6 +302,20 @@ function History() {
     done
 }
 
+function Back() {
+    # $0 : Current Directory
+    SCRIPT_DIR=$(dirname "$0")
+    BASH_RUNFILE_PATH="$SCRIPT_DIR/../Bash_run.sh"
+
+    # Bash_run.sh 파일 존재 여부 확인 후 실행
+    if [[ -f "$BASH_RUNFILE_PATH" ]]; then
+        source "$BASH_RUNFILE_PATH"
+    else
+        echo "Error: Bash_run.sh not found at $BASH_RUNFILE_PATH"
+        exit 1
+    fi
+}
+
 # Bash Run to get Menu list
 function Menulist() {
     PS3="Git Command to Select One: "
@@ -303,7 +327,7 @@ function Menulist() {
             "Commit") Commit ;;
             "Branch") Branch ;;
             "History") History ;;
-            "Back") source BASH_RUNFILE_PATH ;;
+            "Back") Back ;;
             *) echo "Invalid option. Please try again." ;;
         esac
     done
