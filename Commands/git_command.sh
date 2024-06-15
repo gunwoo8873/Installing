@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/env bash
 
 ################################################################
 # Start developing Git management commands (2024. 04. 10 ~ )
@@ -103,20 +103,20 @@ function Settings() {
             echo "Repository to HRAD reset"
             echo Warings : Note that the initializes additional and committed files and returns all of the work.""
             echo "경고 : 추가 및 커밋된 파일을 초기화하고 모든 작업을 반환합니다."
-            git reset --hard
+            #git reset --hard
         }
 
         # Soft : Note that the initializes additional and committed files and returns of the work
         #
         Soft() {
             echo "Repository to SOFT reset"
-            git reset --soft HAED~1
+            #git reset --soft HAED~1
         }
 
         # Mixed : 
         Mixed() {
             echo "Repository to MIXED reset"
-            git reset --mixed
+            #git reset --mixed
         }
 
         PS3=""
@@ -128,6 +128,7 @@ function Settings() {
                 SOFT) Soft ;;
                 MIXED) Mixed ;;
                 Back) Settings ;;
+                *) echo "Invalid option. Please try again." ;;
             esac
         done
     }
@@ -142,6 +143,7 @@ function Settings() {
         "Pull") Pull ;;
         "Reset") Reset ;;
         "Back") Menulist ;;
+        *) echo "Invalid option. Please try again." ;;
         esac
     done
 }
@@ -182,6 +184,7 @@ function Commit() {
         Commit
     }
 
+    # 현재 기능 구현 X
     Remove() {
         echo "Current committed repository logs"
         git log -2
