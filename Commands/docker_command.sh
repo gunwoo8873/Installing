@@ -1,59 +1,117 @@
-#!/bin/bash
+#!/bin/env bash
 
 ################################################################
 # Start developing Docker management commands (2024. 06. 08 ~ )
 ################################################################
 # QnA
-# 다른 외부 기능을 가져오고 싶은 경우는 Function.value 형식으로 작성한다? wjy?
 ################################################################
 
 # Main File Set list and configuration
-DOCKERFILE_PATH="../Dockerfile"
-DOCKERIGNORE_PATH="../Dockerignore"
-BASH_RUNFILE_PATH="./../Bash_run.sh"
+SCRIPT_PATH=$(dirname "$0")
+BASH_RUNFILE_PATH="$SCRIPT_PATH/../Bash_run.sh"
+DOCKERFILE_PATH="$SCRIPT_PATH/../Dockerfile"
+DOCKERIGNORE_PATH="$SCRIPT_PATH/../Dockerignore"
 
-# Docker Container Managerment
-Container() {
-    Create() {}
-    Remove() {}
-    Start() {}
-    Stop() {}
-    Pause() {}
-    Restart() {}
-    Exit() {}
+CONTIANER_NAME_CHECK="^[a-zA-Z/-_]$"
+OPTION_CHECK="^[a-z]$"
+IMAGE_NAME_CHECK="^[a-zA-Z0-9.]"
+
+# Container Managerment
+function Container() {
+    Managerment() {
+        Create() {
+            read -p "Enter the container option : " CONTAINER_OPTION
+            read -p "Enter a container that uses the default image name. : " CONTAINER_BASE_IMAGE
+            if [[ $CONTAINER_OPTION =~ ${OPTION_CHECK} && $CONTAINER_BASE_IMAGE =~ ${IMAGE_NAME_CHECK} ]]; then
+                docker container create --name $CONTAINER_OPTION $CONTAINER_BASE_IMAG
+            else
+                echo "Invalid option"
+                Create
+            fi
+        }
+        
+        Remove() {
+            # command : docker container rm -f [CONTAINER_NAME]
+            docker container rm -f "$CONTAINER_NAME"
+        }
+    }
+
+    Status(){
+        Start() {
+        # command : docker container rm -f or all [CONTAINER_NAME]
+        docker container start -f "$CONTAINER_NAME"
+        }
+
+        Stop() {
+            # command : docker container stop -f or all [CONTAINER_NAME]
+            docker container stop "$CONTAINER_NAME"
+        }
+
+        Pause() {
+            # command : docker container pause -f or all [CONTAINER_NAME]
+            docker container pause "$CONTAINER_NAME"
+        }
+
+        Restart() {
+            # command : docker container restart -f or all [CONTAINER_NAME]
+            docker container restart "$CONTAINER_NAME"
+        }
+        
+        Kill() {
+            read -p 
+            # command : docker container kill -f or all [CONTAINER_NAME]
+            docker container kill "$CONTAINER_NAME"
+        }
+
+        read -p "Select the Container Status Menu : "
+        STATUS_OPTIONS=("Start" "Stop" "Pause" "Restart" "Kill" "Back")
+        select STATUS_SELECT in "${STATUS_OPTIONS[@]}"
+    }
 
     List() {
         echo "Current Docker Container list"
         docker container ls
         Container
     }
-    
-    Back() {
-        Docker_Menulist
-    }
 
-    PS3=""
-    opstions=("Create" "Remove" "Start" "Stop" "Pause" "Restart" "Exit" "List" "Back")
-    select CONTAINER_MANAGERMENT in "${opstions[@]}"
+    PS3="Select Container run menu : "
+    CONTAINER_TYPE=("Managerment" "Status Type" "List" "Back")
+    select CONTAINER_MANAGERMENT in "${CONTAINER_TYPE[@]}"
     do
+        case $CONTAINER_MANAGERMENT in
+            Managerment) Managerment ;;
+            Status) Status ;;
+            Back) Back ;;
+            *) $! ;;
+        esac
     done
 }
 
-Image() {
+function Image() {
     Build() {
-        # Docker Image Build Create to Setup
         echo "Image Build at Dockerfile to Create"
         read -p "Enter the image name and tag to build : " IMAGE_BUILD_NAME IMAGE_BUILD_TAG
-        if [[ ${IMAGE_BUILD_NAME} =~ ^[a-zA-Z]$ && ${IMAGE_BUILD_TAG} =~ ^[a-zA-Z1-9.]$ ]]
-        docker build -t ${IMAGE_BUILD_NAME}:${IMAGE_BUILD_TAG} .
+        if [[ ${IMAGE_BUILD_NAME} =~ ^[a-zA-Z-_/]$ && ${IMAGE_BUILD_TAG} =~ ^[a-zA-Z1-9.]$ ]]; then
+            docker build -t ${IMAGE_BUILD_NAME}:${IMAGE_BUILD_TAG} .
+        else
+            echo $!
+        fi
     }
 
-    Push() {}
+    Push() {
+        # command : docker image push [OPTIONS] name[:IMAGE_TAG]
+    }
 
-    Merge() {}
+    Save() {
+        read -p "Enter thr image name : " IMAGE_NAME
+        # command : docker image save [OPTIONS] name[:IMAGE_TAG]
+        # command(Sort) : docker save
+        docker save myimage:latest | gzip > myimage_latest.tar.gz
+    }
 
     Remove() {
         Image.List
+        # command : docker image rm -f [IMAGE_NAME]:[IMAGE_TAG]
     }
 
     List() {
@@ -77,14 +135,14 @@ Image() {
     }
 
     PS3=""
-    opstions=("Create" "Remove" "Start" "Stop" "Pause" "Restart" "Exit" "List" "Back")
+    opstions=("Build" "Push" "Save" "Remove" "List" "Docker Hub" "Back")
     select CONTAINER_MANAGERMENT in "${opstions[@]}"
     do
     done
 }
 
 # Docker Volume Managerment
-Volume() {
+function Volume() {
     Create() {}
     Remove() {}
     Mount() {}
@@ -98,12 +156,12 @@ Volume() {
 }
 
 # Docker Build Managerment
-Build() {
+function Build() {
     echo "It's a function that's not currently being implemented"
 }
 
 # Docker Settings Managerment
-Settings() {
+function Settings() {
     echo "It's a function that's not currently being implemented"
     Login() {
         docker login
@@ -111,27 +169,21 @@ Settings() {
     Logout() {
         docker logout
     }
+    Export() {
+
+    }
 
     PS3=""
-    opstions=("Create" "Remove" "Start" "Stop" "Pause" "Restart" "Exit" "List" "Back")
+    opstions=( "Back")
     select CONTAINER_MANAGERMENT in "${opstions[@]}"
     do
     done
 }
 
-Back() {
-    if [[ -x ${BASH_RUNFILE_PATH} ]]; then
-        source ${BASH_RUNFILE_PATH}
-    elif [[ ! -x ${BASH_RUNFILE_PATH} || ! -f ${BASH_RUNFILE_PATH} ]]
-        echo error
-    fi
-}
-
-# Docker Main Managerment
-function Docker_Menulist() {
+function Menulist() {
     PS3="Select the menu to run : "
-    docker_menu=("Container" "Image" "Volume" "Build" "Settings" "Back")
-    select DOCKER_MENU_SELECT in 
+    MENULIST=("Container" "Image" "Volume" "Build" "Settings" "Back")
+    select MENU_SELECT in "${MENULIST[@]}"
     do
         Container) Container ;;
         Image) Image ;;
