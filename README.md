@@ -1,34 +1,26 @@
-### **Git Command Skip**
-### Bash + Window
----
-**<h4>Version : b1.0.0 ( 2024. 03. 15 ~ )</h4>**
-| Main Scirpt File at `b1.0.0 `is `Build.sh`
-* Setting
-    * Bash 2.4x.0
-    * User.name and User.email are required for git user setting **config.json**
-        > **Warning** : config.json is user data for Security don`t Commit
-        ```json
-        {
-            "GIT_USER" : {
-                "GIT_NAME" : "your_name",
-                "GIT_EMAIL" : "your_email"
-            }
-        }
-        ```
-* Commit
-    * ADD + Commit
-    * Remove
-* Pull
-* Branch
-    * Create, Delete, Switch
+# Bash and Window SP Project N.1
 
-**<h4>Version : w1.0.0 ( 2024. 0x. x ~ )</h4>**
-| Main Script File at `w1.0.0` is `Build.ps1` and `Build.cmd`
-* Setting
-    * Powershell 7.x (LTS) ~
-* Commit
-    * ADD + Commit
-    * Remove
-* Pull
-* Branch
-    * Create, Delete, Switch
+### Bash
+---
+* Git
+    * Function list
+        * Commit
+        * Branch
+        * History
+        * Setting
+* Docker
+    * Function list
+        * Container
+        * Image
+        * Volume
+        * Build
+        * Setting
+* SQL
+    * Install
+    * 
+
+### Window
+---
+
+### Rust(?)
+---
