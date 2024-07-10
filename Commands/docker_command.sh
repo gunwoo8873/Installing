@@ -1,11 +1,5 @@
 #!/bin/env bash
 
-################################################################
-# Start developing Docker management commands (2024. 06. 08 ~ )
-################################################################
-# QnA
-################################################################
-
 # Main File Set list and configuration
 SCRIPT_PATH=$(dirname "$0")
 BASH_RUNFILE_PATH="$SCRIPT_PATH/../Bash_run.sh"
