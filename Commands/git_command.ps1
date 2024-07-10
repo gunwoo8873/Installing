@@ -1,3 +1,4 @@
+Test-AppLockerPolicy
 # TODO(@gunwoo8873): Command to Initialize and Project Setup (2024. 06. 05 ~ **)
 function Project_Setup(){
     
