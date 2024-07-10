@@ -1,5 +1,4 @@
 #!/bin/env bash
-
 ######
 # Main File Set list and configuration
 SCRIPT_PATH=$(dirname "$0")
