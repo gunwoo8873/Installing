@@ -1,10 +1,10 @@
 FROM node:latest
 
-COPY . .
+#### Docker 환경상 Powershell은 사용 불가로 제외
+COPY ./bin_sh/ /bin_sh/
 
-#RUN git clone https://github.com/gunwoo8873/fp1_project.git
-#RUN npm install packahe.json
-WORKDIR /src .
+WORKDIR /src/app .
+RUN npm i
 
 EXPOSE 8080
 CMD [ "node", "./src/server.js" ]

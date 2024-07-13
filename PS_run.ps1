@@ -16,8 +16,8 @@ Claude Project : https://github.com/gunwoo8873/Claude-Project.git
 }
 
 # Main Commands script path
-$GIT_SCRIPT_PATH = "./Commands/git_command.ps1"
-$DOCKER_SCIRPT_PATH = "./Commands/docker_command.ps1"
+$GIT_SCRIPT_PATH = "./bin_ps/git.ps1"
+$DOCKER_SCIRPT_PATH = "./bin_ps/docker.ps1"
 
 # TODO(@gunwoo8873) : PowerShell Scripting and Main Command Menu
 class DebugCommand {

@@ -1,2 +1,4 @@
 #Token
 config.json
+node_modules
+.trunk

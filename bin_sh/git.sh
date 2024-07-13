@@ -301,8 +301,8 @@ function History() {
 
 function Back() {
     # $0 : Current Directory
-    SCRIPT_DIR=$(dirname "$0")
-    BASH_RUNFILE_PATH="$SCRIPT_DIR/../Bash_run.sh"
+    SCRIPT_DIR="$(dirname -- 0)"
+    BASH_RUNFILE_PATH="$SCRIPT_DIR/run.sh"
 
     # Bash_run.sh 파일 존재 여부 확인 후 실행
     if [[ -f "$BASH_RUNFILE_PATH" ]]; then

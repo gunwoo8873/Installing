@@ -1,8 +1,8 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 #### 환경 변수
 CURRENT_DIR="$(dirname "$0")" # 현재 디렉토리 정보
-DIR_BACK="$CURRENT_DIR/../../Bash_run.sh"
+RUN_PATH="$CURRENT_DIR/../../run.sh"
 
 trap '' SIGINT # Terminal 강제 종료 비활성화
 

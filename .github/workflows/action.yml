@@ -1,11 +1,15 @@
 name: test-github-action
 
 on:
-    push: branches: ["master"]
-    pull_request: branches: ["master"]
+    clone:
+        branches: [main]
+    push:
+        branches: [main]
+    pull_request:
+        branches: [dev, hotfix, release, minor, major]
+    issues:
+        types: [opened, edited, reopened, assigned, unassigned, labeled, unlabeled]
 
-job:
-    name: test-github-action
-    runs-on: ubuntu-latest
-    steps:
-        
+jobs:
+    git-action:
+        name:
