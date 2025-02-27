@@ -1,4 +1,0 @@
-node_modules
-.trunk
-Dockerfile
-.dockerignore
